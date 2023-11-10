@@ -1,0 +1,1 @@
+export const API_URL = 'https://malachite-lake-watcher.glitch.me/api/'
