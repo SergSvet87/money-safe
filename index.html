@@ -1,129 +1,211 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="UA-uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+      rel="icon"
+      href="img/favicon.svg"
+      type="image/svg+xml"
+    />
 
-  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+    <link
+      href="css/overlayscrollbars.min.css"
+      rel="stylesheet"
+    />
 
-  <link href="css/overlayscrollbars.min.css" rel="stylesheet">
-  <link href="css/style.css" rel="stylesheet">
+    <link
+      href="css/style.css"
+      rel="stylesheet"
+    />
 
-  <script src="js/script.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
 
-  <title>MoneySafe</title>
-</head>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"
+      defer
+    ></script>
 
-<body>
-  <h1 class="visually-hidden">Сохрани свои деньги, зарабатывай и трать их с
-    умом, а мы поможем это контролировать</h1>
-  <section class="finance ">
-    <div class="container">
-      <header class="finance__header">
-        <img class="finance__logo" src="./img/logo.png" alt="Логотип MoneySafe">
-        <button class="finance__report">Отчет</button>
-      </header>
+    <script
+      src="js/script.js"
+      type="module"
+    ></script>
 
-      <form class="finance__form">
-        <fieldset class="finance__details">
-          <input class="finance__input finance__input--category" type="text"
-            name="category" list="categoryList" placeholder="Выберите категорию"
-            required>
+    <title>MoneySafe</title>
+  </head>
 
-          <datalist id="categoryList">
-            <option value="Продукты питания"></option>
-            <option value="Транспорт"></option>
-            <option value="Жилье"></option>
-            <option value="Развлечения"></option>
-            <option value="Одежда"></option>
-          </datalist>
+  <body>
+    <section class="finance">
+      <h1 class="visually-hidden">
+        Збережи свої гроші, заробляй та витрачай їх з розумом, контролювати за цим допоможе MoneySafe
+      </h1>
+      <div class="container">
+        <header class="finance__header">
+          <img
+            class="finance__logo"
+            src="./img/logo.png"
+            alt="Логотип MoneySafe"
+          />
+          <button class="finance__report">Звіт</button>
+        </header>
 
-          <input type="number" class="finance__input finance__input--amount"
-            placeholder="Сумма" name="amount" required>
+        <form class="finance__form">
+          <fieldset class="finance__details">
+            <input
+              class="finance__input finance__input--category"
+              type="text"
+              name="category"
+              list="categoryList"
+              placeholder="Выберіть категорію"
+              required
+            />
 
-          <textarea class="finance__description" name="description"
-            placeholder="Описание операции" required></textarea>
-        </fieldset>
+            <datalist id="categoryList">
+              <option value="Продукти харчування"></option>
+              <option value="Транспорт"></option>
+              <option value="Житло"></option>
+              <option value="Розваги"></option>
+              <option value="Одяг"></option>
+            </datalist>
 
-        <fieldset class="finance__balance">
-          <button class="finance__button" type="submit"
-            data-type-operation="expenses" aria-label="Добавить расходы">
-            <svg width="60" height="60" viewBox="0 0 60 60" fill="none"
-              xmlns="http://www.w3.org/2000/svg">
-              <circle cx="30" cy="30" r="29" fill="white" fill-opacity="0.6"
-                stroke="currentColor" stroke-width="2" />
-              <path d="M36.2631 28.4112V32.75H22.8391V28.4112H36.2631Z"
-                fill="#0038FF" />
-            </svg>
-          </button>
+            <input
+              type="number"
+              class="finance__input finance__input--amount"
+              placeholder="Сума"
+              name="amount"
+              required
+            />
 
-          <p class="finance__amount">0</p>
+            <textarea
+              class="finance__description"
+              name="description"
+              placeholder="Опис операції"
+              required
+            ></textarea>
+          </fieldset>
 
-          <button class="finance__button" type="submit"
-            data-type-operation="income" aria-label="Добавить доходы">
-            <svg width="60" height="60" viewBox="0 0 60 60" fill="none"
-              xmlns="http://www.w3.org/2000/svg">
-              <circle cx="29.9999" cy="30" r="29" fill="white"
-                fill-opacity="0.6" stroke="currentColor" stroke-width="2" />
-              <path
-                d="M27.5021 39.2383V19.0877H32.0738V39.2383H27.5021ZM19.7127 31.4489V26.8771H39.8632V31.4489H19.7127Z"
-                fill="#0038FF" />
-            </svg>
-          </button>
-        </fieldset>
-      </form>
+          <fieldset class="finance__balance">
+            <button
+              class="finance__button"
+              type="submit"
+              data-type-operation="expenses"
+              aria-label="Додати витрати"
+            >
+              <svg
+                width="60"
+                height="60"
+                viewBox="0 0 60 60"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <circle
+                  cx="30"
+                  cy="30"
+                  r="29"
+                  fill="white"
+                  fill-opacity="0.6"
+                  stroke="currentColor"
+                  stroke-width="2"
+                />
+                <path
+                  d="M36.2631 28.4112V32.75H22.8391V28.4112H36.2631Z"
+                  fill="#0038FF"
+                />
+              </svg>
+            </button>
 
-      <div class="report">
-        <div class="container report__container">
-          <h2 class="report__title">Отчет</h2>
+            <p class="finance__amount">0</p>
 
-          <form class="report__dates">
-            <div class="report__date">
-              <label for="start-date">Начало периода</label>
-              <input type="date" id="start-date" name="startDate">
-            </div>
+            <button
+              class="finance__button"
+              type="submit"
+              data-type-operation="income"
+              aria-label="Додати прибутки"
+            >
+              <svg
+                width="60"
+                height="60"
+                viewBox="0 0 60 60"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <circle
+                  cx="29.9999"
+                  cy="30"
+                  r="29"
+                  fill="white"
+                  fill-opacity="0.6"
+                  stroke="currentColor"
+                  stroke-width="2"
+                />
+                <path
+                  d="M27.5021 39.2383V19.0877H32.0738V39.2383H27.5021ZM19.7127 31.4489V26.8771H39.8632V31.4489H19.7127Z"
+                  fill="#0038FF"
+                />
+              </svg>
+            </button>
+          </fieldset>
+        </form>
 
-            <div class="report__date">
-              <label for="end-date">Конец периода</label>
-              <input type="date" id="end-date" name="endDate">
-            </div>
+        <div class="report">
+          <div class="container report__container">
+            <h2 class="report__title">Звіт</h2>
 
-            <button class="report__button">Показать</button>
-          </form>
+            <form class="report__dates">
+              <div class="report__date">
+                <label for="start-date">Початок періоду</label>
+                <input
+                  type="date"
+                  id="start-date"
+                  name="startDate"
+                />
+              </div>
 
-          <table class="report__table">
-            <thead>
-              <tr>
-                <th class="report__header-cell">Категория</th>
-                <th class="report__header-cell">Сумма</th>
-                <th class="report__header-cell">Описание</th>
-                <th class="report__header-cell">Дата</th>
-                <th class="report__header-cell">Действие</th>
-                <th class="report__header-cell"></th>
-                <!-- Пустая ячейка для симметрии -->
-              </tr>
-            </thead>
+              <div class="report__date">
+                <label for="end-date">Кінець періоду</label>
+                <input
+                  type="date"
+                  id="end-date"
+                  name="endDate"
+                />
+              </div>
 
-            <tbody class="report__operation-list">
-            </tbody>
-          </table>
+              <button class="report__button">Показати</button>
+            </form>
 
-          <button class="report__add-button"
-            id="generateChartButton">Сформировать график</button>
+            <table class="report__table">
+              <thead>
+                <tr>
+                  <th class="report__header-cell">Категорія</th>
+                  <th class="report__header-cell">Сума</th>
+                  <th class="report__header-cell">Опис</th>
+                  <th class="report__header-cell">Дата</th>
+                  <th class="report__header-cell">Дія</th>
+                  <th class="report__header-cell"></th>
+                  <!-- Пустая ячейка для симметрии -->
+                </tr>
+              </thead>
 
-          <div class="report__chart">
-            <canvas id="myChart"></canvas>
+              <tbody class="report__operation-list"></tbody>
+            </table>
+
+            <button
+              class="report__add-button"
+              id="generateChartButton"
+            >
+              Сформувати графік
+            </button>
+
+            <div class="report__chart"></div>
+
+            <button class="report__close">&#10006;</button>
           </div>
-
-          <button class="report__close">&#10006;</button>
         </div>
       </div>
-    </div>
-  </section>
-
-
-
-</body>
-
+    </section>
+  </body>
 </html>

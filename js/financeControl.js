@@ -46,6 +46,6 @@ export const financeControl = async () => {
     return acc;
   }, 0);
 
-  financeAmount.textContent = `${amount.toLocaleString()} ₴`;
+  financeAmount.textContent = `${amount.toLocaleString('UA-uk')} ₴`;
   financeForm.addEventListener("submit", addNewOperation);
 };

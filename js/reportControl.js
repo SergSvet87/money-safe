@@ -1,4 +1,6 @@
+import { OverlayScrollbars } from "./overlayscrollbars.esm.min.js";
 import { financeControl } from "./financeControl.js";
+import { clearChart, generateChart } from "./generateChart.js";
 import { reformatDate } from "./helpers.js";
 import { deleteData, getData } from "./service.js";
 
@@ -6,24 +8,45 @@ const financeReport = document.querySelector(".finance__report");
 const reportBox = document.querySelector(".report");
 const reportOperationList = document.querySelector(".report__operation-list");
 const reportDates = document.querySelector(".report__dates");
+const generateChartButton = document.querySelector("#generateChartButton");
+
+OverlayScrollbars(reportBox, {});
 
 const typesOperation = {
   income: "дохід",
   expenses: "витрата",
 };
 
+let actualData = [];
+
 const closeReport = ({ target }) => {
   if (
     target.closest(".report__close") ||
     (!target.closest(".report") && target !== financeReport)
   ) {
-    reportBox.classList.remove("report__open");
+    gsap.to(reportBox, {
+      opacity: 0,
+      scale: 0,
+      duration: 0.5,
+      ease: "power2.in",
+      onComplete() {
+        reportBox.style.visibility = "hidden";
+      },
+    });
+
     document.removeEventListener("click", closeReport);
   }
 };
 
 const openReport = () => {
-  reportBox.classList.add("report__open");
+  reportBox.style.visibility = "visible";
+
+  gsap.to(reportBox, {
+    opacity: 1,
+    scale: 1,
+    duration: 0.5,
+    ease: "power2.out",
+  });
 
   document.addEventListener("click", closeReport);
 };
@@ -65,14 +88,19 @@ export const reportControl = () => {
       reportRow.remove();
       financeControl();
 
-      // !todo clearChart()
+      clearChart();
     }
   });
 
   financeReport.addEventListener("click", async () => {
+    const textContent = financeReport.textContent;
+    financeReport.textContent = "Завантаження ...";
+    financeReport.disabled = true;
+    actualData = await getData("finance");
+    financeReport.textContent = textContent;
+    financeReport.disabled = false;
+    renderReport(actualData);
     openReport();
-    const data = await getData("finance");
-    renderReport(data);
   });
 
   reportDates.addEventListener("submit", async (e) => {
@@ -93,7 +121,13 @@ export const reportControl = () => {
     const queryStr = searchParams.toString();
     const url = queryStr ? `finance?${queryStr}` : "finance";
 
-    const data = await getData(url);
-    renderReport(data);
+    actualData = await getData(url);
+    console.log("actualData: ", actualData);
+    renderReport(actualData);
+    clearChart();
   });
 };
+
+generateChartButton.addEventListener("click", () => {
+  generateChart(actualData);
+});

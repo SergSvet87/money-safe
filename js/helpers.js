@@ -1,5 +1,5 @@
 export const convertStringToNumber = (str) => {
-  const noSpaceStr = str.replace(/\s+/g, "");
+  const noSpaceStr = String(str).replace(/\s+/g, "");
   const num = parseFloat(noSpaceStr);
 
   if (!isNaN(num) && isFinite(num)) {
@@ -31,7 +31,7 @@ export const animationNumber = (el, num) => {
     const newNum = initialNumber + increment * currentFrame;
     el.textContent = `${newNum.toLocaleString()} ₴`;
 
-    if (currentFrame > totalFrame) {
+    if (currentFrame < totalFrame) {
       requestAnimationFrame(animate);
     } else {
       el.textContent = `${num.toLocaleString()} ₴`;
